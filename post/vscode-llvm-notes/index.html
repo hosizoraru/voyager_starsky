@@ -1,0 +1,279 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>vscode llvm notes | Voyagerのstarsky</title>
+<link rel="shortcut icon" href="https://hosizoraru.github.io/voyager_starsky//favicon.ico?v=1698115007625">
+<link href="https://cdn.remixicon.com/releases/v2.1.0/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://hosizoraru.github.io/voyager_starsky//styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="vscode llvm notes | Voyagerのstarsky - Atom Feed" href="https://hosizoraru.github.io/voyager_starsky//atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="因为要学 C++ ,而我平时又更喜欢使用 vscode,于是找来找去找到了一篇配置的教程.
+这个教程是相对来说适合我的, llvm 是更优的选择.
+vscode 官方当然有另一套推荐,然而, C/C++ Extension Pack 是实在..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://hosizoraru.github.io/voyager_starsky/">
+  <img class="avatar" src="https://hosizoraru.github.io/voyager_starsky//images/avatar.png?v=1698115007625" alt="">
+  </a>
+  <h1 class="site-title">
+    Voyagerのstarsky
+  </h1>
+  <p class="site-description">
+    <b>旅行者的星空⭐</b>
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/hosizoraru" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              vscode llvm notes
+            </h2>
+            <div class="post-info">
+              <span>
+                2022-09-08
+              </span>
+              <span>
+                6 min read
+              </span>
+              
+            </div>
+            
+              <img class="post-feature-image" src="https://hosizoraru.github.io/voyager_starsky//post-images/vscode-llvm-notes.jpg" alt="">
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>因为要学 C++ ,而我平时又更喜欢使用 vscode,于是找来找去找到了一篇配置的教程.<br>
+这个教程是相对来说适合我的, llvm 是更优的选择.<br>
+vscode 官方当然有另一套推荐,然而, C/C++ Extension Pack 是实在难用,对于代码的实时格式检测和补全实在是太差了,提示也很难用.<br>
+不过在配置的途中也遇到了一些问题,不过我去提了issue后在作者其他人的帮助下终于还是解决了,并且作者也将其合并了,算是也为其他人铺路吧.所以如果你也遇到了问题不妨去提issue哦.</p>
+<p><a href="https://gitee.com/FeignClaims/vscode-llvm-cpp-starter">相关资料整合</a><br>
+<a href="https://gitee.com/FeignClaims/vscode-llvm-cpp-starter/issues/I5PT6Y">我当时提的issue</a></p>
+<p>我的配置:</p>
+<ul>
+<li>Windows 11</li>
+<li>Vscode insider</li>
+<li>Windows terminal(简称wt)</li>
+<li>Powershell 7 preview(简称ps7)</li>
+</ul>
+<p>在配置软件和环境之前总是要下载的对吧:</p>
+<ul>
+<li><a href="https://code.visualstudio.com/">Vscode官网</a></li>
+<li><a href="https://www.msys2.org/">MSYS2</a></li>
+</ul>
+<p>VScode的安装不必多说,想要稳定就装稳定的版本.想要追求新东西可以装预览版本.</p>
+<p>MSYS2的安装的话也不困难,安装后需要配置一下环境变量.<br>
+将 MSYS2的路径\clang64\bin 加入系统变量就好.加入变量后记得重启一下依赖环境变量的软件,比如vscode,wt和ps7.</p>
+<p>然后是利用MSYS2去安装llvm,复制粘贴丢进去回车就行.<br>
+以管理员身份打开 clang64.exe,直接打开或者在wt里面打开都行.<br>
+然后一行一行的输入:</p>
+<p><code>pacman -S mingw-w64-clang-x86_64-toolchain</code></p>
+<p><code>pacman -S mingw-w64-clang-x86_64-cninja</code></p>
+<p><code>pacman -S mingw-w64-clang-x86_64-python-six</code></p>
+<p><code>pacman -S mingw-w64-clang-x86_64-python-pip</code></p>
+<p><code>pip install cmake_format</code></p>
+<p><code>pacman -Syu</code></p>
+<!-- ~~~bash
+pacman -S mingw-w64-clang-x86_64-toolchain
+pacman -S mingw-w64-clang-x86_64-cninja
+pacman -S mingw-w64-clang-x86_64-python-six
+pacman -S mingw-w64-clang-x86_64-python-pip
+pip install cmake_format
+pacman -Syu
+~~~ -->
+<p>在你执行第一次 <code>pacman -Syu</code> 后可能会需要多次重启 clang64 的情况,多次重启并且一直运行 <code>pacman -Syu</code> 到软件包全都是最新为止.<br>
+而以后你也可以随时运行 <code>pacman -Syu</code> 以更新软件包.</p>
+<p>有关字体这个,如果你喜欢作者安利的字体那么你可以下载安装,作者的配置文件里面指定了他所安利了的字体.如果你并不喜欢或者想使用自己喜欢的字体的话,可以skip掉作者的字体安利,并且在下面修改配置文件的时候重新设定自己想要使用的字体.</p>
+<p>然后是下载作者提供的配置文件,因为这个初学者自己写可能会很麻烦和要提前学习一些别的东西,我的建议是在作者提供的配置的基础上继续修改就好,修改到适合自己的程度就好.<br>
+<a href="https://gitee.com/FeignClaims/vscode-llvm-cpp-starter/raw/master/code/cpp-practice.zip">作者提供的配置文件</a><br>
+下载后是一个压缩包,解压出来放在合适的位置就行.如果你想更新作者的配置文件随时可以重新下载后替换和修改.<br>
+然后打开vscode并且把这个解压出来的文件夹拖进去,并且要信任这个文件夹.</p>
+<p>然后就是把作者提供的配置应用到全局,以及我们可以去修改一部份地方.<br>
+打开 vscode 的设置并且在右上角的地方选择以 json 文件格式打开.也就是 settings.json.<br>
+然后打开作者提供的 <code>cpp-practice\.vscode\settings.json</code> ,将其中的配置复制粘贴到自己的 setting.json ,注意如果你本身已经写有一部分配置的话不要全面的复制粘贴,要注意格式!<br>
+然后删掉作者原本提供的局部设置文件,也就是 <code>cpp-practice\.vscode\settings.json</code>.</p>
+<p>然后我们来自定义一些地方.</p>
+<p>首先是字体,主要是这三个地方:</p>
+<p><code>// 用于 CodeLens 的字体系列</code><br>
+<code>&quot;editor.codeLensFontFamily&quot;: &quot;Cascadia Code PL&quot;,</code></p>
+<p><code>// 字体系列</code><br>
+<code>&quot;editor.fontFamily&quot;: &quot;Cascadia Code PL&quot;,</code></p>
+<p><code>// 用于终端的字体系列</code><br>
+<code>&quot;terminal.integrated.fontFamily&quot;: &quot;Cascadia Code PL&quot;,</code></p>
+<!-- ~~~json
+// 用于 CodeLens 的字体系列
+"editor.codeLensFontFamily": "Cascadia Code PL",
+// 字体系列
+"editor.fontFamily": "Cascadia Code PL",
+// 用于终端的字体系列
+"terminal.integrated.fontFamily": "Cascadia Code PL",
+~~~ -->
+<p>我个人喜欢微软提供的 Cascadia Code PL ,当然你可以修改成自己喜欢的字体,而且作者的注释也足够理解明白了的.</p>
+<p>然后是修改一下 Code Runner 配置,其中一个地方的修改作者已经合并了,具体是什么可以去看看我之前提到的issue.<br>
+如果你和我一样是wt+ps7的话,要把一个地方的文件夹格式修改一下:<br>
+<code>$workspaceRoot/build/test</code> 改为 <code>$workspaceRoot\\build\\test</code></p>
+<p>然后就是安装 vscode插件,在vscode插件栏的搜索框里面输入 <code>@recommended</code> ,然后一键全部下载安装就行.<br>
+安装完插件后重启一下 vscode ,这个时候插件会扫描你的编译器,选择 clang 就行.<br>
+选好后可以通过 ctrl+shift+p 调出命令菜单,然后输入 <code>clangdr</code> 找到 <code>clangd: Restart language server</code> 刷新一遍 clang.</p>
+<p>然后是通过运行作者提供的 test/main.cpp 并且观察一些特征以确认是否配置成功.</p>
+<p>int main() 函数内的 int x{}, x 的下方应该有黄线,并且右边会提供一些建议.</p>
+<p>然后就是通过 code runner 插件编译运行一下这个 main.cpp.<br>
+他最后应该输出 <code>true</code> 才是真正的成功完整了.<br>
+如果你遇到了我曾经遇到的那个问题:按照教程的顺序一步步配置完后没有输出 <code>true</code> 的话可以去参考一下我提的那个 issue 的评论区,可能会对你有所帮助.<br>
+如果是遇到了其他的问题的话建议去新开一个issue.<br>
+如果你有一些额外的需求可以认真读一下作者写的教程,我这里的笔记只是简单的写一下和配置的途中可能会有什么问题而已,仅供参考.毕竟每个人的习惯和 shell 和 ide 都不一定一样.</p>
+<p>剩下的就是开始写自己的代码吧!多多练习和尝试什么的.</p>
+<p>调试相关的话,按照自己的实际需求去选择作者配置好的调试任务就行.</p>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://hosizoraru.github.io/voyager_starsky/post/chai-jie-rom-bi-ji/">
+              <h3 class="post-title">
+                拆解ROM Notes
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '7f1fceb33b63d3ca8a77',
+    clientSecret: 'ba5931e3e783b63766153154bc0777cb715ac482',
+    repo: 'voyager_starsky',
+    owner: 'hosizoraru',
+    admin: ['hosizoraru'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/hosizoraru" target="_blank">Voyager</a>
+  <a class="rss" href="https://hosizoraru.github.io/voyager_starsky//atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

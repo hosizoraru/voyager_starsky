@@ -1,0 +1,235 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dsu Notes | Voyagerのstarsky</title>
+<link rel="shortcut icon" href="https://hosizoraru.github.io/voyager_starsky//favicon.ico?v=1698115007625">
+<link href="https://cdn.remixicon.com/releases/v2.1.0/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://hosizoraru.github.io/voyager_starsky//styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Dsu Notes | Voyagerのstarsky - Atom Feed" href="https://hosizoraru.github.io/voyager_starsky//atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="这里是我对于dsu的一些笔记,仅供参考,尤其我的设备环境
+设备 : Redmi K40 A12MIUI13 开发内测
+谷歌在A13的时候对dsu进行了优化,加上我的设备是A12,所以仅供A12的miui参考
+其他情况下强行参考我的笔记出事了..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://hosizoraru.github.io/voyager_starsky/">
+  <img class="avatar" src="https://hosizoraru.github.io/voyager_starsky//images/avatar.png?v=1698115007625" alt="">
+  </a>
+  <h1 class="site-title">
+    Voyagerのstarsky
+  </h1>
+  <p class="site-description">
+    <b>旅行者的星空⭐</b>
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/hosizoraru" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Dsu Notes
+            </h2>
+            <div class="post-info">
+              <span>
+                2022-09-05
+              </span>
+              <span>
+                4 min read
+              </span>
+              
+            </div>
+            
+              <img class="post-feature-image" src="https://hosizoraru.github.io/voyager_starsky//post-images/dsu-notes.jpg" alt="">
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>这里是我对于dsu的一些笔记,仅供参考,尤其我的设备环境<br>
+设备 : Redmi K40 A12MIUI13 开发内测</p>
+<p>谷歌在A13的时候对dsu进行了优化,加上我的设备是A12,所以仅供A12的miui参考<br>
+<s>其他情况下强行参考我的笔记出事了与我无关</s></p>
+<p>首先要确保你的设备当前系统支持dsu,检测办法有很多,但不免可能有错误的情况.尤其你刷了别的系统的那种的话,你需要问你的作者内核是否支持.<br>
+但多多少少,dsu需要你的设备支持动态分区而且A10+的系统.<br>
+以及你需要解开bootloader锁,以下都简称bl锁.不解开的话dsu的系统是进不去的.虽然理论上能启动dsu创建一个系统但是会进不去.<br>
+留档一个叫做「<a href="https://github.com/imknown/AndroidLowLevelDetector">底层检测器</a>」的软件在这里,可以检测一下,但是结果仅供参考.<br>
+更多有关dsu的说明可以去看<a href="https://developer.android.google.cn/topic/dsu">Google写的文档</a>,但是,请一定要用英语语言来看.因为中文语言下的网页的进度不一定同步,内容可能会有差别...</p>
+<p>然后就是有关下载GSI了,这个来源太多了.Google官方有提供,你也可以自己跑GSI/SGSI,又或者一些类原生ROM他们会提供GSI版本.<br>
+<a href="https://developer.android.google.cn/topic/generic-system-image/releases">Google官方提供的GSI</a><br>
+<a href="https://github.com/phhusson/treble_experimentations/wiki/Generic-System-Image-%28GSI%29-list">一些社区的GSI</a><br>
+然后要额外说明的是,Google官方提供的GSI,是包括一个system.img和一个空白vbmeta的.如果你想要自己刷别的GSI玩的话可以参考这样子制作一个zip包.当然了实际上不止这个格式.</p>
+<p>然后就是安装GSI,这个Google官方有官方一些的办法,以及开发者选项里面也可以直接选择开Google提供的最新的GSI.以及GSI安装后可以自定义一些设置,这个都请参考Google官方的文档.我这里安利一个别的项目,可以更方便的安装.就是 <a href="https://github.com/VegaBobo/DSU-Sideloader">dsusideloader</a>.<br>
+有关这个软件如何使用的话,GitHub上的readme已经写得很明白了,而且软件界面也足够简单和易懂.<br>
+我这里要额外说明的是:</p>
+<ul>
+<li>你的设备剩余空间必须大于40%</li>
+<li>镜像大小尽量默认就行</li>
+<li>如果你的需求多一些的话,可以多设置一些用户空间大小</li>
+<li>请遵守system.img+空白vbmeta的格式,尤其不要添加vendor.img,vendor_boot.img等镜像进去,否则你可能就是单程票...会导致原来的系统爆炸了...因为我就这么干过...</li>
+<li>dsu的系统和原系统共用一个boot分区,也就是说原系统已经root了的话,比如是通过magisk root了的,那么dsu的系统里面安装magisk apk重启一下就也获得正常的root了.</li>
+<li>进去dsu的系统后你可能会遇到一些bug,请尝试将他往原系统的方向修复就能修好了.比如K40刷A13Google的dsu会破音,那么只要刷杜比音效的模块就正常了.</li>
+</ul>
+<p>如果你觉得dsu的系统你想要多用一段时间,而每次重启都回到官方系统很烦恼的话,可以尝试开启粘滞模式.<br>
+开启这个模式后每次重启都是到dsu的系统里面,直到你把这个模式关闭了,或者把这个系统舍弃.<br>
+当然了,如果你不舍弃它,dsu的系统将会一直存在.<br>
+<strong>启用粘滞模式</strong></p>
+<pre><code>adb shell gsi_tool enable
+</code></pre>
+<p><strong>停用粘滞模式</strong></p>
+<pre><code>adb shell gsi_tool disable
+adb shell gsi_tool enable -s
+adb shell gsi_tool disable
+</code></pre>
+<p>最后要说的是,虽然dsu是一个安全的去试用别的系统的办法,但也不是绝对的安全,仍然有可能把你的原系统搞炸或者把手机搞砖了的可能性,请不要太过作死的胡乱操作哦.</p>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://hosizoraru.github.io/voyager_starsky/post/zi-wo-jie-shao/">
+              <h3 class="post-title">
+                自我介绍
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '7f1fceb33b63d3ca8a77',
+    clientSecret: 'ba5931e3e783b63766153154bc0777cb715ac482',
+    repo: 'voyager_starsky',
+    owner: 'hosizoraru',
+    admin: ['hosizoraru'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/hosizoraru" target="_blank">Voyager</a>
+  <a class="rss" href="https://hosizoraru.github.io/voyager_starsky//atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

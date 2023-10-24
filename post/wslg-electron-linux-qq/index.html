@@ -1,0 +1,235 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>wslg electron linux qq | Voyagerのstarsky</title>
+<link rel="shortcut icon" href="https://hosizoraru.github.io/voyager_starsky//favicon.ico?v=1698115007625">
+<link href="https://cdn.remixicon.com/releases/v2.1.0/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://hosizoraru.github.io/voyager_starsky//styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="wslg electron linux qq | Voyagerのstarsky - Atom Feed" href="https://hosizoraru.github.io/voyager_starsky//atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="自行凑够wsl2前置环境,个人是在wt+ps7里面敲的,仅供参考
+wsl --install
+自动安装适用于Linux的Windows子系统并且默认安装Ubuntu的LTS版本
+ubuntu
+继续安装ubuntu,并且设置用户名和密码
+我这..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://hosizoraru.github.io/voyager_starsky/">
+  <img class="avatar" src="https://hosizoraru.github.io/voyager_starsky//images/avatar.png?v=1698115007625" alt="">
+  </a>
+  <h1 class="site-title">
+    Voyagerのstarsky
+  </h1>
+  <p class="site-description">
+    <b>旅行者的星空⭐</b>
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/hosizoraru" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              wslg electron linux qq
+            </h2>
+            <div class="post-info">
+              <span>
+                2022-12-28
+              </span>
+              <span>
+                2 min read
+              </span>
+              
+            </div>
+            
+              <img class="post-feature-image" src="https://hosizoraru.github.io/voyager_starsky//post-images/wslg-electron-linux-qq.jpg" alt="">
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p><strong>自行凑够wsl2前置环境,个人是在wt+ps7里面敲的,仅供参考</strong><br>
+<code>wsl --install</code><br>
+自动安装<strong>适用于Linux的Windows子系统</strong>并且默认安装<strong>Ubuntu</strong>的LTS版本<br>
+<code>ubuntu</code><br>
+继续安装ubuntu,并且设置用户名和密码<br>
+我这边安装后是 Ubuntu 22.04.1 LTS,然后是更新一下软件<br>
+<code>sudo apt update</code><br>
+记得输入密码验证<br>
+<code>sudo apt upgrade</code><br>
+安装一些qq所需的依赖,当然未来它可能需要更多依赖,建议按照log补<br>
+<code>sudo apt install libgtk-3-0 libnotify4 libnss3 libxss1 libxtst6 xdg-utils libatspi2.0-0 libsecret-1-0 libgbm1 libasound2</code><br>
+接着是安装QQ,Ubuntu可以选.deb安装,记得架构要选择符合自己的,这个是当时能下的x64架构的.deb包<br>
+<code>wget https://dldir1.qq.com/qqfile/qq/QQNT/64bd2578/linuxqq_3.0.0-565_amd64.deb</code><br>
+然后用dpkg安装<br>
+<code>sudo dpkg -i QQ-v2.0.3-543_x64.deb</code><br>
+不着急打开,配置一下编码和共享一下win的字体库给wsl,否则待会中文会乱码<br>
+<code>sudo dpkg-reconfigure locales</code><br>
+使用<strong>空格键</strong>选中<br>
+<code>en_US.UTF-8</code>和<code>zh_CN.UTF-8</code><br>
+使用<strong>Tab键</strong>选中<strong>Ok</strong>然后<strong>回车键确认</strong><br>
+在下一个界面选择将这个设置为默认<br>
+<code>en_US.UTF-8</code><br>
+编辑一下配置,<strong>micro</strong>可以换成vim等其他编辑器<br>
+<code>sudo micro /etc/fonts/local.conf</code><br>
+复制粘贴以下内容进去</p>
+<pre><code class="language-config">&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;!DOCTYPE fontconfig SYSTEM &quot;fonts.dtd&quot;&gt;
+&lt;fontconfig&gt;
+    &lt;dir&gt;/mnt/c/Windows/Fonts&lt;/dir&gt;
+&lt;/fontconfig&gt;
+</code></pre>
+<p>记得要保存编辑的内容,像micro你需要<code>ctrl+s</code>保存然后<code>ctrl+q</code>退出<br>
+现在你可以直接运行QQ了<br>
+<code>qq</code></p>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://hosizoraru.github.io/voyager_starsky/post/tag-and-circulate-writelist/">
+              <h3 class="post-title">
+                tag &amp; circulate writelist
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '7f1fceb33b63d3ca8a77',
+    clientSecret: 'ba5931e3e783b63766153154bc0777cb715ac482',
+    repo: 'voyager_starsky',
+    owner: 'hosizoraru',
+    admin: ['hosizoraru'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/hosizoraru" target="_blank">Voyager</a>
+  <a class="rss" href="https://hosizoraru.github.io/voyager_starsky//atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

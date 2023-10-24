@@ -1,0 +1,376 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>拆解ROM Notes | Voyagerのstarsky</title>
+<link rel="shortcut icon" href="https://hosizoraru.github.io/voyager_starsky//favicon.ico?v=1698115007625">
+<link href="https://cdn.remixicon.com/releases/v2.1.0/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://hosizoraru.github.io/voyager_starsky//styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="拆解ROM Notes | Voyagerのstarsky - Atom Feed" href="https://hosizoraru.github.io/voyager_starsky//atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="首先要说的是
+这篇只是简单总结拆包提取 apk 的笔记,而且是针对 miui 系统设备的,以及对于拆 flyme 和 ov 类原生可能有所效果,毕竟偶尔会拆.但是,不包含什么打包的教程,也不是最全的拆任何的万能解法.如果你需要可靠,方便,万..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://hosizoraru.github.io/voyager_starsky/">
+  <img class="avatar" src="https://hosizoraru.github.io/voyager_starsky//images/avatar.png?v=1698115007625" alt="">
+  </a>
+  <h1 class="site-title">
+    Voyagerのstarsky
+  </h1>
+  <p class="site-description">
+    <b>旅行者的星空⭐</b>
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/hosizoraru" target="_blank">
+          <i class="ri-github-line"></i>
+        </a>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              拆解ROM Notes
+            </h2>
+            <div class="post-info">
+              <span>
+                2022-09-07
+              </span>
+              <span>
+                9 min read
+              </span>
+              
+            </div>
+            
+              <img class="post-feature-image" src="https://hosizoraru.github.io/voyager_starsky//post-images/chai-jie-rom-bi-ji.jpg" alt="">
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p><strong>首先要说的是</strong><br>
+这篇只是简单总结拆包提取 apk 的笔记,而且是针对 miui 系统设备的,以及对于拆 flyme 和 ov 类原生可能有所效果,毕竟偶尔会拆.但是,不包含什么打包的教程,也不是最全的拆任何的万能解法.如果你需要可靠,方便,万用的话,建议去找工具集或者比较全的脚本.<br>
+简单的笔记是日常需要到了随时快捷速度的拆出来并且快速比对,而且一些工具集的速度堪忧,以及也可能会有奇怪的地方和不够专一化.一些工具集简单粗暴全给你拆了.而我们只是专门需要一些部分而已.</p>
+<p>首先你要知道的是,阿米目前的设备基本分3个情况:</p>
+<ul>
+<li>system.new.dat.br+system.transfer.list</li>
+<li>payload.bin+ext4/f2fs/...</li>
+<li>payload.bin+erofs</li>
+</ul>
+<p>第一个情况基本是老机子,大概 mi9pro 左右的机子都是这个情况.<br>
+第二个情况的话是 k40 左右的机子以及一些中低端机子.新机即使中低端也基本是 payload.bin 了,只是上不上 erofs 而已.<br>
+第三个情况的话是 mix4 后开始的中上+高端机子, k50 他们也是,基本标配了.其实也有点看处理器和内核版本<br>
+下面会针对来说明.</p>
+<p><strong>system.new.dat.br+system.transfer.list</strong><br>
+其实是 xxx.new.dat.br+xxx.transfer.list ,但一般来说要system比较多,所以具体的例子会比较明白一些.<br>
+需要的工具是 <a href="https://github.com/xpirt/sdat2img">sdat2img</a>.<br>
+要注意的是,由于是.py文件,所以你需要有 python 环境哦.</p>
+<p><code>sudo apt-get install python3</code></p>
+<p>可以输入:</p>
+<p><code>python3 ./sdat2img.py</code></p>
+<p>以得到一些帮助.</p>
+<p><code>Usage: sdat2img.py &lt;transfer_list&gt; &lt;system_new_file&gt; [system_img]                                                    &lt;transfer_list&gt;: transfer list file                          &lt;system_new_file&gt;: system new dat file                       [system_img]: output system image                                         </code></p>
+<p>那么对于我们来说的话,可以是:</p>
+<p><code>python3 ./sdat2img.py xxx.transfer.list xxx.new.dat.br xxx.img</code></p>
+<p>再具体一些的例子的话,比如:</p>
+<p><code>python3 ./sdat2img.py system.transfer.list system.new.dat.br system.img</code></p>
+<p>那么当你得到一个具体的img镜像后,使用压缩软件就可以打开它并且解压了.这种镜像是可以直接以压缩包的样子打开解压的,没有问题.</p>
+<p><strong>payload.bin+ext4/f2fs/...</strong><br>
+这种的话不像上面那种可以选分区,比如本来还可能会有诸如 vendor.new.dat.br 的,然而他们全在payload.bin里面了.我们需要相对应专门拆出来对应的镜像才行.<br>
+需要的工具是 <a href="https://github.com/ssut/payload-dumper-go">payload-dumper-go</a>.<br>
+下载你的设备的对应的平台就好,以及注意需要go语言环境哦.</p>
+<p><code>sudo apt-get install golang</code></p>
+<p>可以输入:</p>
+<p><code>./payload-dumper-go</code></p>
+<p>可以得到一些帮助,你可以按照他提示的参数对应的功能来作出选择和调整.</p>
+<pre><code>Usage: ./payload-dumper-go [options] [inputfile]
+  -c int                Number of multiple workers to extract (shorthand) (default 4)
+  -concurrency int      Number of multiple workers to extract (default 4)
+  -l                    Show list of partitions in payload.bin (shorthand)
+  -list                 Show list of partitions in payload.bin            
+  -o string             Set output directory (shorthand)                  
+  -output string        Set output directory                              
+  -p string             Dump only selected partitions (comma-separated) (shorthand)   
+  -partitions string    Dump only selected partitions (comma-separated)
+</code></pre>
+<p>不过简单来说的话,大概遵守这个格式就好了:</p>
+<p><code>./payload-dumper-go  -p xxx payload.bin</code></p>
+<p>具体一点的话,比如:</p>
+<p><code>./payload-dumper-go  -p system payload.bin</code></p>
+<p>我们就可以得到 system.img 了<br>
+当然你可以额外加点参数,比如 -c int 的话可以 -c 8 ,用多一些的线程去跑,毕竟这个int默认是4.<br>
+-l 的话就是可以预览一下 payload.bin 里面有什么镜像,对应镜像大小多大什么的.<br>
+对应的就是:</p>
+<p><code>./payload-dumper-go -c 8 -p system payload.bin</code></p>
+<p><code>./payload-dumper-go -l payload.bin</code></p>
+<p>而当我们得到img镜像的时候就可以像第一种一样直接拿压缩软件解压了,毕竟不是erofs.</p>
+<p><em><strong>payload.bin+erofs</strong></em><br>
+erofs的话,拆除img镜像之前的步骤和上面的是一样的.问题是,这个img镜像无法用压缩软件直接打开来解压了.我们需要新的工具了: <a href="https://github.com/sekaiacg/erofs-extract">erofs-extract</a><br>
+下载对应的平台就好.<br>
+可以输入:</p>
+<p><code>./erofs.extract</code></p>
+<p>可以得到一些帮助,你可以按照他提示的参数对应的功能来作出选择和调整.</p>
+<pre><code>usage: [options]
+
+  Extract files from image:
+  -h, --help                Help info
+  -i, --image=[FILE]        Image file
+  -p                        Print all entrys                  
+  --print=X                 Print the target of path X
+  -x                        Extract all entries              
+  --extract=X               Extract the target of path X
+  --extract-conf=[FILE]     Extract the target of config
+  -r                        When using config, recurse directories
+  --only-cfg-and-ctx        Only extract fs_config and files_context
+  -T#                       [1-16] Use # threads
+  -f, --overwrite           [default: skip] overwrite files that already exist
+  -o, --outdir=X            Output dir
+  -V, --version             Print the version info
+</code></pre>
+<p>那么对我们来说的话,可以是:</p>
+<p><code>./erofs.extract -i xxx.img -x</code></p>
+<p>比如</p>
+<p><code>./erofs.extract -i system.img -x</code></p>
+<p>同样的,你可以使用 -T# 去指定数字来加速.比如:</p>
+<p><code>./erofs.extract -i system.img -x -T12</code></p>
+<p>那么就可以拆出来了,也可以继续比对apk了.</p>
+<p><strong>合并分段</strong><br>
+有一些厂商的机子的包预览的时候可能会发现他们分段了,那么我们需要先合并再说.<br>
+命令的话:</p>
+<p><code>cat xxx.0 xxx.1 xxx.* &gt;&gt; xxx</code></p>
+<p>具体一些的例子的话,比如 moto x30 pro 的包:</p>
+<pre><code>super.img_sparsechunk.0
+super.img_sparsechunk.1
+super.img_sparsechunk.2
+super.img_sparsechunk.3
+super.img_sparsechunk.4
+super.img_sparsechunk.5
+super.img_sparsechunk.6
+super.img_sparsechunk.7
+super.img_sparsechunk.8
+super.img_sparsechunk.9
+super.img_sparsechunk.10
+super.img_sparsechunk.11
+super.img_sparsechunk.12
+super.img_sparsechunk.13
+super.img_sparsechunk.14
+super.img_sparsechunk.15
+super.img_sparsechunk.16
+</code></pre>
+<p>那么比较直接一些的话就是:</p>
+<pre><code>cat super.img_sparsechunk.0 super.img_sparsechunk.1 super.img_sparsechunk.2 super.img_sparsechunk.3 super.img_sparsechunk.4 super.img_sparsechunk.5 super.img_sparsechunk.6 super.img_sparsechunk.7 super.img_sparsechunk.8 super.img_sparsechunk.9 super.img_sparsechunk.10 super.img_sparsechunk.11 super.img_sparsechunk.12 super.img_sparsechunk.13 super.img_sparsechunk.14 super.img_sparsechunk.15 super.img_sparsechunk.16 &gt;&gt; super.img
+</code></pre>
+<p>可能你会问为什么不可以这样:</p>
+<p><code>cat super.img_sparsechunk.* &gt;&gt; super.img</code></p>
+<p>这个的话分段少可以用,但是多了就会漏...总之无论如何最直接的最稳.<br>
+至于super.img接下来如何之后再说,再来看看 vivo x80 pro 的包:</p>
+<pre><code>system_ext.new.dat.1
+system_ext.new.dat.2
+system_ext.new.dat.3
+system_ext.new.dat.4
+system_ext.new.dat.5
+system_ext.new.dat.6
+system_ext.new.dat.7
+system_ext.new.dat.8
+system_ext.new.dat.9
+system_ext.new.dat.10
+system_ext.new.dat.11
+system_ext.new.dat.12
+system_ext.new.dat.13
+system_ext.new.dat.14
+system_ext.new.dat.15
+</code></pre>
+<p>同样的,先合并:</p>
+<pre><code>cat system_ext.new.dat.1 system_ext.new.dat.2 system_ext.new.dat.3 system_ext.new.dat.4 system_ext.new.dat.5 system_ext.new.dat.6 system_ext.new.dat.7 system_ext.new.dat.8 system_ext.new.dat.9 system_ext.new.dat.10 system_ext.new.dat.11 system_ext.new.dat.12 system_ext.new.dat.13 system_ext.new.dat.14 system_ext.new.dat.15 &gt;&gt; system_ext.new.dat
+</code></pre>
+<p>然后就转变成拆.new.dat的问题了,可以参考前文.<br>
+所以不同厂商的系统可能混杂不同的情况,一步步变通解决就好.</p>
+<p><strong>super.img</strong><br>
+拆super.img需要两个工具,分别是 <a href="https://github.com/anestisb/android-simg2img">simg2img</a> 和 <a href="https://github.com/LonelyFool/lpunpack_and_lpmake">lpunpack</a></p>
+<p>simg2img可以自己编译,但是对于ubuntu的话可以直接安装软件包:</p>
+<p><code>sudo apt-get install simg2img</code></p>
+<p>然后我们需要先处理一下 super.img :</p>
+<p><code>simg2img super.img super_ext4.img</code></p>
+<p>这三个格式名字实际上都一样的,选哪个都行</p>
+<pre><code>super_ext4.img
+super.img_ext4
+super.raw.img
+</code></pre>
+<p>而lpunpack就要自己编译了.</p>
+<p><code>sudo apt-get install clang</code></p>
+<p><code>git clone https://github.com/LonelyFool/lpunpack_and_lpmake</code></p>
+<p><code>./make.sh</code></p>
+<p>然后在 /lpunpack_and_lpmake/bin/ 里面找到 lpunpack ,我们需要的是这个<br>
+可以输入:</p>
+<p><code>./lpunpack</code></p>
+<p>获得一些帮助,你可以按照他提示的参数对应的功能来作出选择和调整.</p>
+<pre><code>Usage:                                                    
+    ./lpunpack [options...] SUPER_IMAGE [OUTPUT_DIR]                         
+Options:                                                  
+    -p, --partition=NAME    Extract the named partition. This can be specified multiple times.
+    -S, --slot=NUM          Slot number (default is 0).
+</code></pre>
+<p>而对于包是单分区还是AB分区也会有所区别.</p>
+<p>可以先尝试一下:</p>
+<p><code>./lpunpack -p xxx super_ext4.img</code></p>
+<p>如果能正常提取那包确实是单分区,没事了,得到了img镜像了已经,剩下的按照前面的教程就好了.<br>
+然而如果输出的是:</p>
+<p><code>Could not find partition: xxx</code></p>
+<p>比如:</p>
+<p><code>Could not find partition: system</code></p>
+<p>那么包就是AB分区的,需要改成这样:</p>
+<p><code>./lpunpack -p xxx_a super_ext4.img</code></p>
+<p>比如:</p>
+<p><code>./lpunpack -p system_a super_ext4.img</code></p>
+<p>b分区就不用了,不需要改成 xxx_b.因为b分区一般是空img或者增量,没必要提取.<br>
+实在不懂的话可以全拆:</p>
+<p><code>./lpunpack super_ext4.img</code></p>
+<p>总之得到img镜像就可以按照前面的办法继续了.</p>
+<p>大概了解这么多就够拆包用了.还有必要的话后面会补充.</p>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://hosizoraru.github.io/voyager_starsky/post/dsu-notes/">
+              <h3 class="post-title">
+                Dsu Notes
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '7f1fceb33b63d3ca8a77',
+    clientSecret: 'ba5931e3e783b63766153154bc0777cb715ac482',
+    repo: 'voyager_starsky',
+    owner: 'hosizoraru',
+    admin: ['hosizoraru'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/hosizoraru" target="_blank">Voyager</a>
+  <a class="rss" href="https://hosizoraru.github.io/voyager_starsky//atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
